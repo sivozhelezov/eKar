@@ -36,7 +36,7 @@ public class AsyncService {
     }
 
     @Async("taskExecutor")
-    public void startCustomer() {
+    public void startConsumer() {
         process(TYPE_CONSUMER);
     }
 

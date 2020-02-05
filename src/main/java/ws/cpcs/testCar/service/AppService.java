@@ -21,10 +21,10 @@ public class AppService {
         this.async = async;
     }
 
-    public void changeCounter(Integer producers, Integer customers) {
+    public void changeCounter(Integer producers, Integer consumers) {
 
         IntStream.range(0,producers).forEach(i -> async.startProducer());
-        IntStream.range(0,customers).forEach(i -> async.startCustomer());
+        IntStream.range(0,consumers).forEach(i -> async.startConsumer());
     }
 
     public void resetCounter(Integer val) {

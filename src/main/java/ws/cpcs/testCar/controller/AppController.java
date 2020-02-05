@@ -23,8 +23,8 @@ public class AppController {
     @PostMapping("/send")
     @ResponseStatus(HttpStatus.CREATED)
     public void send(@RequestParam("producers") Integer producers,
-                     @RequestParam("customers") Integer customers) {
-        srv.changeCounter(producers, customers);
+                     @RequestParam("consumers") Integer consumers) {
+        srv.changeCounter(producers, consumers);
     }
 
     @PostMapping("/set")
