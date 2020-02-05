@@ -18,30 +18,26 @@ public class SafeCounter {
     }
 
     Boolean increment(String thread) {
-        while(true) {
-            int existingValue = getValue();
-            if (existingValue == 100 || existingValue == 0) {
-                return false;
-            }
-            int newValue = existingValue + 1;
-            if(APP_COUNTER.compareAndSet(existingValue, newValue)) {
-                System.out.println("NEW VALUE INCREASED: " + thread + " - " + newValue);
-                return newValue == 100;
-            }
+        int existingValue = getValue();
+        if (existingValue == 100 || existingValue == 0) {
+            return false;
         }
+        int newValue = APP_COUNTER.incrementAndGet();
+        if (newValue != existingValue) {
+            System.out.println("NEW VALUE INCREASED: " + thread + " - " + newValue);
+        }
+        return newValue == 100;
     }
 
     Boolean decrement(String thread) {
-        while(true) {
-            int existingValue = getValue();
-            if (existingValue == 100 || existingValue == 0) {
-                return false;
-            }
-            int newValue = existingValue - 1;
-            if(APP_COUNTER.compareAndSet(existingValue, newValue)) {
-                System.out.println("NEW VALUE DECREASED: " + thread + " - " + newValue);
-                return newValue == 0;
-            }
+        int existingValue = getValue();
+        if (existingValue == 100 || existingValue == 0) {
+            return false;
         }
+        int newValue = APP_COUNTER.decrementAndGet();
+        if (newValue != existingValue) {
+            System.out.println("NEW VALUE DECREASED: " + thread + " - " + newValue);
+        }
+        return newValue == 0;
     }
 }
